@@ -11,8 +11,8 @@
     <div class="login-container">
         <h2>IT-2307 Home Web Site</h2>
         <form id="loginForm">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
             
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
@@ -26,6 +26,23 @@
     </div>
 
     <script src="styles/js/login.js"></script>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const storedData = JSON.parse(localStorage.getItem('profileData')) || {};
+
+            if (storedData.email === email && storedData.password === password) {
+                alert('Login successful!');
+                window.location.href = 'index.html';
+            } else {
+                document.getElementById('error-message').textContent = 'Invalid email or password';
+            }
+        });
+    </script>
 
 </body>
 </html>
